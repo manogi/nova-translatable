@@ -7,8 +7,8 @@ This [Laravel Nova](https://nova.laravel.com) allows you to make any input field
 
 ## Requirements
 
-- `laravel/nova: ^2.9 || ^3.0`
-- `spatie/laravel-translatable: ^4.0 || ^5.0 || ^6.0`
+- `laravel/nova: ^4.0`
+- `spatie/laravel-translatable: ^5.0 || ^6.0`
 
 ## Features
 
