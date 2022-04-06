@@ -1,12 +1,12 @@
 <?php
 
-namespace OptimistDigital\NovaTranslatable;
+namespace KraenkVisuell\NovaTranslatable;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Arr;
+use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Nova;
 
 class FieldServiceProvider extends ServiceProvider
 {
@@ -14,34 +14,42 @@ class FieldServiceProvider extends ServiceProvider
     {
         // Publish configuration file
         $this->publishes([
-            __DIR__ . '/../config/nova-translatable.php' => config_path('nova-translatable.php'),
+            __DIR__.'/../config/nova-translatable.php' => config_path('nova-translatable.php'),
         ], 'nova-translatable-config');
 
         // Serve asset(s)
         Nova::serving(function (ServingNova $event) {
-            Nova::script('translatable-field', __DIR__ . '/../dist/js/translatable-field.js');
-            Nova::script('locale-select-field', __DIR__ . '/../dist/js/locale-select-field.js');
+            Nova::script('translatable-field', __DIR__.'/../dist/js/translatable-field.js');
+            Nova::script('locale-select-field', __DIR__.'/../dist/js/locale-select-field.js');
         });
 
         // Register mixin
         Field::mixin(new TranslatableFieldMixin);
 
-        $this->mergeConfigFrom(__DIR__ . '/../config/nova-translatable.php', 'nova-translatable');
+        $this->mergeConfigFrom(__DIR__.'/../config/nova-translatable.php', 'nova-translatable');
     }
 
     protected static function isValidLocaleArray($localeArray)
     {
-        return (!empty($localeArray) && is_array($localeArray) && Arr::isAssoc($localeArray));
+        return ! empty($localeArray) && is_array($localeArray) && Arr::isAssoc($localeArray);
     }
 
     public static function getLocales($overrideLocales = null)
     {
-        if (is_callable($overrideLocales)) $overrideLocales = call_user_func($overrideLocales);
-        if (static::isValidLocaleArray($overrideLocales)) return $overrideLocales;
+        if (is_callable($overrideLocales)) {
+            $overrideLocales = call_user_func($overrideLocales);
+        }
+        if (static::isValidLocaleArray($overrideLocales)) {
+            return $overrideLocales;
+        }
 
         $configuredLocales = config('nova-translatable.locales', ['en' => 'English']);
-        if (is_callable($configuredLocales)) $configuredLocales = call_user_func($configuredLocales);
-        if (static::isValidLocaleArray($configuredLocales)) return $configuredLocales;
+        if (is_callable($configuredLocales)) {
+            $configuredLocales = call_user_func($configuredLocales);
+        }
+        if (static::isValidLocaleArray($configuredLocales)) {
+            return $configuredLocales;
+        }
 
         return ['en' => 'English'];
     }
@@ -49,8 +57,11 @@ class FieldServiceProvider extends ServiceProvider
     public static function normalizeAttribute($attribute)
     {
         if (in_array(request()->method(), ['PUT', 'POST'])) {
-            if (substr($attribute, -2) === '.*') $attribute = substr($attribute, 0, -2);
+            if (substr($attribute, -2) === '.*') {
+                $attribute = substr($attribute, 0, -2);
+            }
         }
+
         return $attribute;
     }
 }

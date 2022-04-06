@@ -1,9 +1,9 @@
 <?php
 
-namespace OptimistDigital\NovaTranslatable\Fields;
+namespace KraenkVisuell\NovaTranslatable\Fields;
 
+use KraenkVisuell\NovaTranslatable\Rules\NotExactlyAttachedTranslatable;
 use Laravel\Nova\Fields\BelongsToMany;
-use OptimistDigital\NovaTranslatable\Rules\NotExactlyAttachedTranslatable;
 
 class BelongsToManyTranslatable extends BelongsToMany
 {

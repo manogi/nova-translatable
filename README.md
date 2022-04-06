@@ -87,7 +87,7 @@ To do so, add the `->rulesFor()` on your field and the `HandlesTranslatable` tra
 `->rulesFor` accepts `array|string|callable` locales and `array|callable` rules.
 
 ```php
-use OptimistDigital\NovaTranslatable\HandlesTranslatable;
+use KraenkVisuell\NovaTranslatable\HandlesTranslatable;
 
 class Product extends Resource
 {
@@ -133,7 +133,7 @@ The configuration option `fill_other_locales_from` allows you to pre-fill other 
 
 ### One select for all fields on a page
 
-If you don't want to display the locale select next to each field, you can set the `display_type` to `none` and add a `OptimistDigital\NovaTranslatable\Fields\LocaleSelect` field to your Nova resource. This will render a single select for all fields.
+If you don't want to display the locale select next to each field, you can set the `display_type` to `none` and add a `KraenkVisuell\NovaTranslatable\Fields\LocaleSelect` field to your Nova resource. This will render a single select for all fields.
 
 ## Edge cases
 

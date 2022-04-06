@@ -1,9 +1,9 @@
 <?php
 
-namespace OptimistDigital\NovaTranslatable\Fields;
+namespace KraenkVisuell\NovaTranslatable\Fields;
 
+use KraenkVisuell\NovaTranslatable\FieldServiceProvider;
 use Laravel\Nova\Fields\Field;
-use OptimistDigital\NovaTranslatable\FieldServiceProvider;
 
 class LocaleSelect extends Field
 {
@@ -19,7 +19,7 @@ class LocaleSelect extends Field
 
         $this->translatableMeta = [
             'locales' => FieldServiceProvider::getLocales(),
-            'displayType' => config('nova-translatable.locale_select.display_type')
+            'displayType' => config('nova-translatable.locale_select.display_type'),
         ];
 
         return $this->setTranslatableMeta();
@@ -31,12 +31,14 @@ class LocaleSelect extends Field
     public function setLocales($locales): self
     {
         $this->translatableMeta['locales'] = FieldServiceProvider::getLocales($locales);
+
         return $this->setTranslatableMeta();
     }
 
     public function setDisplayType(string $type): self
     {
         $this->translatableMeta['displayType'] = $type;
+
         return $this->setTranslatableMeta();
     }
 

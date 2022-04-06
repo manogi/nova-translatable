@@ -1,6 +1,6 @@
 <?php
 
-namespace OptimistDigital\NovaTranslatable;
+namespace KraenkVisuell\NovaTranslatable;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +29,9 @@ trait HandlesTranslatable
             foreach ($attributeRules['translatable'] as $locale => $localeRules) {
                 $newRuleAttribute = $attribute;
                 $pos = strrpos($attribute, '.*');
-                if ($pos !== false) $newRuleAttribute = substr_replace($attribute, '', $pos, strlen('.*'));
+                if ($pos !== false) {
+                    $newRuleAttribute = substr_replace($attribute, '', $pos, strlen('.*'));
+                }
                 $newRuleAtrribute = "{$newRuleAttribute}.{$locale}";
 
                 // We copy the locale rule into the rules array
@@ -75,6 +77,7 @@ trait HandlesTranslatable
     {
         // Get rules before $request->all() call
         $rules = static::rulesForCreation($request);
+
         return Validator::make($request->all(), $rules)
             ->after(function ($validator) use ($request) {
                 static::afterValidation($request, $validator);
@@ -86,6 +89,7 @@ trait HandlesTranslatable
     {
         // Get rules before $request->all() call
         $rules = static::rulesForUpdate($request, $resource);
+
         return Validator::make($request->all(), $rules)
             ->after(function ($validator) use ($request) {
                 static::afterValidation($request, $validator);
